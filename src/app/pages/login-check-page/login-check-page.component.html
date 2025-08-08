@@ -1,0 +1,9 @@
+<div class="container">
+  <div *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>
+  <div class="login-action-container" style="text-align:center; margin-top: 2rem;" *ngIf="!loading">
+    <button (click)="startLogin()" class="btn btn-primary">Iniciar sesión</button>
+    <p style="margin-top:1rem;">Tu sesión ha expirado o no es válida. Por favor, inicia sesión nuevamente.</p>
+  </div>
+</div>

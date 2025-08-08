@@ -27,3 +27,41 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, xihucalli_web');
   });
 });
+
+describe("to parse", () => {
+
+  it("should parse an array of strings", () => {
+    const fakeResponse = "[\n" +
+      "    {\n" +
+      "        \"description\": \"mi cuenta de fb\",\n" +
+      "        \"id\": 1754013579031,\n" +
+      "        \"title\": \"facebook\",\n" +
+      "        \"url\": \"Facebook.com\",\n" +
+      "        \"username\": \"angeldomp49@gmail.com\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "        \"description\": \"yyz account\",\n" +
+      "        \"id\": 1754013430892,\n" +
+      "        \"title\": \"yyz\",\n" +
+      "        \"url\": \"rock.com\",\n" +
+      "        \"username\": \"yyz@rock.com\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "        \"description\": \"for fb\",\n" +
+      "        \"id\": 1754013383409,\n" +
+      "        \"title\": \"fb\",\n" +
+      "        \"url\": \"fb.com\",\n" +
+      "        \"username\": \"adp@fb.com\"\n" +
+      "    },\n" +
+      "    {\n" +
+      "        \"description\": \"google\",\n" +
+      "        \"id\": 3,\n" +
+      "        \"title\": \"google account\",\n" +
+      "        \"url\": \"google.com\",\n" +
+      "        \"username\": \"angeldomp49\"\n" +
+      "    }\n" +
+      "]";
+
+    console.log(JSON.parse(fakeResponse));
+  });
+});

@@ -1,0 +1,29 @@
+<div class="container keyrings-page">
+
+  <div class="keyring-action-button-group">
+    <button type="button" class="keyring-new-form" (click)="openModal()">Add a new keyring</button>
+  </div>
+
+  <app-keyring-new-form *ngIf="showModal" (closeModal)="closeModal()"></app-keyring-new-form>
+
+  <table class="keyrings-table">
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Url</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let keyring of keyringsList">
+        <td>{{keyring.title}}</td>
+        <td>{{keyring.username}}</td>
+        <td>******</td>
+        <td>{{keyring.url}}</td>
+        <td>{{keyring.description}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
