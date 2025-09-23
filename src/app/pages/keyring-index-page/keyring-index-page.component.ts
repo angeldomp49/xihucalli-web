@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {KeyringType} from './KeyringType';
+import {KeyringPasswordType, KeyringType} from './KeyringType';
 import {KeyringHttpClient} from './KeyringHttpClient';
 import {NgForOf, NgIf} from '@angular/common';
 import {KeyringNewFormComponent} from './keyring-new-form/keyring-new-form.component';
@@ -35,6 +35,16 @@ export class KeyringIndexPageComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
+  }
+
+  copyPassword(keyringId: string) {
+    this.keyringHttpClient
+      .getPasswordForKeyring(keyringId)
+      .subscribe((result: {password: string}) => {
+        navigator.clipboard.writeText(result.password)
+
+        alert("Password copied to clipboard")
+      })
   }
 
 }

@@ -41,7 +41,7 @@ export class KeyringNewFormComponent {
     }
 
     const keyring = {
-      id: 0,
+      id: "0",
       title: this.title,
       username: this.username,
       password: this.password,

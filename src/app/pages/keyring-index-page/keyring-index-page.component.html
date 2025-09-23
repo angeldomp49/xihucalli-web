@@ -20,7 +20,9 @@
       <tr *ngFor="let keyring of keyringsList">
         <td>{{keyring.title}}</td>
         <td>{{keyring.username}}</td>
-        <td>******</td>
+        <td>
+          <button (click)="copyPassword(keyring.id)" >Copy password</button>
+        </td>
         <td>{{keyring.url}}</td>
         <td>{{keyring.description}}</td>
       </tr>
