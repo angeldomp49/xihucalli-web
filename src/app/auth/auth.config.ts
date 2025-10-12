@@ -6,7 +6,7 @@ export const authConfig: PassedInitialConfig = {
             authority: `${environment.cognitoAuthorityUrl}/${environment.cognitoUsersPoolId}`,
             redirectUrl: `${environment.remoteHostname}/after-login`,
             postLogoutRedirectUri: window.location.origin,
-            clientId: environment.clientId,
+            clientId: environment.cognitoClientId,
             usePushedAuthorisationRequests: false,
             scope: 'email openid profile',
             responseType: 'code',
