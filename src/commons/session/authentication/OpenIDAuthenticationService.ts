@@ -1,8 +1,7 @@
-import {BehaviorSubject, delay, Observable, of, tap, map} from 'rxjs';
-import {Router} from '@angular/router';
+
 import {inject, Injectable} from '@angular/core';
-import {AuthenticatedResult, LoginResponse, OidcSecurityService} from 'angular-auth-oidc-client';
-import { sha256 } from 'js-sha256';
+import {LoginResponse, OidcSecurityService} from 'angular-auth-oidc-client';
+import {map, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,8 @@ export class OpenIDAuthenticationService {
   isAuthenticated: boolean = false;
 
   private readonly LOGOUT_URL = 'http://xihucalli-web-hosting.s3-website.us-east-2.amazonaws.com/logout';
+  private readonly COGNITO_START_LOGOUT_URL = '"https://us-east-2_kZeUTI40G.auth.us-east-2.amazoncognito.com/logout"';
+  private readonly COGNITO_CLIENT_ID = '1t71utkcgnhjmjm7c0fr6f54po';
 
   private _onRedirectToLogin: () => void = () => {};
 
@@ -40,8 +41,8 @@ export class OpenIDAuthenticationService {
       window.sessionStorage.clear();
     }
 
-    const logoutUrl = new URL("https://us-east-2nqexgbsjn.auth.us-east-2.amazoncognito.com/logout");
-    logoutUrl.searchParams.set("client_id", "gr885242sskiqospietec1kt7");
+    const logoutUrl = new URL(this.COGNITO_START_LOGOUT_URL);
+    logoutUrl.searchParams.set("client_id", this.COGNITO_CLIENT_ID);
     logoutUrl.searchParams.set("logout_uri", this.LOGOUT_URL);
 
     window.location.href = logoutUrl.toString();

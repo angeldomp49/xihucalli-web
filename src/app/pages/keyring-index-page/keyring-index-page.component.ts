@@ -41,10 +41,15 @@ export class KeyringIndexPageComponent implements OnInit {
     this.keyringHttpClient
       .getPasswordForKeyring(keyringId)
       .subscribe((result: {password: string}) => {
-        navigator.clipboard.writeText(result.password)
+
+        navigator.clipboard.writeText(this.formatPassword(result.password))
 
         alert("Password copied to clipboard")
       })
+  }
+
+  formatPassword(password: string): string{
+    return password.replace(/\\/g, '\\\\');
   }
 
 }
