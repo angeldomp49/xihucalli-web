@@ -9,7 +9,7 @@ import {environment} from '../../environments/environment';
 })
 export class ApiHttpClient {
 
-  private readonly apiUrl: string = "https://udzb97yyve.execute-api.us-east-2.amazonaws.com/xihucalli";
+  private readonly apiUrl: string = environment.apiUrl;
 
   public constructor(private http: HttpClient, private openIDAuthenticationService: OpenIDAuthenticationService) {}
 

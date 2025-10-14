@@ -1,6 +1,7 @@
 export const environment = {
   isProduction: true,
   isAuthenticationEnabled: true,
+  apiUrl: "https://udzb97yyve.execute-api.us-east-2.amazonaws.com/xihucalli",
   homeEndpoint: "/keyring",
   loginEndpoint: "/login-check",
   cognitoClientId: '1t71utkcgnhjmjm7c0fr6f54po',
