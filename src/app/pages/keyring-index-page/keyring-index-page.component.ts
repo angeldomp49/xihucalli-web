@@ -44,12 +44,14 @@ export class KeyringIndexPageComponent implements OnInit {
 
         navigator.clipboard.writeText(this.formatPassword(result.password))
 
+        console.log(result.password);
+        console.log(this.formatPassword(result.password));
         alert("Password copied to clipboard")
       })
   }
 
   formatPassword(password: string): string{
-    return password.replace(/\\/g, '\\\\');
+    return atob(password);
   }
 
 }
