@@ -10,7 +10,7 @@ export class KeyringHttpClient{
 
   private readonly keyringsURL = "/keyring";
   private readonly registerKeyringURL = "/password-register";
-  private readonly getPasswordUrl = "/password";
+  private readonly getPasswordUrl = "/keyring/{keyring_id}/password";
 
   public constructor(private apiHttpClient: ApiHttpClient) {}
 
@@ -34,7 +34,7 @@ export class KeyringHttpClient{
 
   public getPasswordForKeyring(keyringId: string): Observable<any>{
     return this.apiHttpClient
-      .getRequestToResource(this.getPasswordUrl+"/"+keyringId)
+      .getRequestToResource(this.getPasswordUrl.replace("{keyring_id}", keyringId));
   }
 
 }
