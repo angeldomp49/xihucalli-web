@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {OpenIDAuthenticationService} from '../../../commons/session/authentication/OpenIDAuthenticationService';
 import {NgIf} from '@angular/common';
 import {SpinnerComponent} from '../../../commons/spinner/spinner.component';
 import {environment} from '../../../environments/environment';
+import {
+  OpenIDAuthenticationService
+} from '../../../commons/session/authentication/cognito_hosted_ui/OpenIDAuthenticationService';
 
 @Component({
   selector: 'app-login-chech-page',
@@ -33,7 +35,7 @@ export class LoginCheckPageComponent implements OnInit {
 
     this.openIDAuthenticationService
       .performAuthCheck()
-      .subscribe( isAuthenticated => {
+      .subscribe( (isAuthenticated: boolean) => {
 
         if(isAuthenticated){
           this.router.navigate([environment.homeEndpoint]);
@@ -42,8 +44,17 @@ export class LoginCheckPageComponent implements OnInit {
       } );
   }
 
-  public startLogin() {
+  public startLoginWithCognito() {
     this.loading = true;
     this.openIDAuthenticationService.login();
   }
+
+  public startLoginWithGoogle() {
+    this.loading = true;
+  }
+
+  public startLoginWithFacebook() {
+    this.loading = true;
+  }
+
 }

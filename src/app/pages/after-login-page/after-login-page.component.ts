@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {OpenIDAuthenticationService} from '../../../commons/session/authentication/OpenIDAuthenticationService';
 import {Router} from '@angular/router';
 import {NgIf} from '@angular/common';
 import {SpinnerComponent} from '../../../commons/spinner/spinner.component';
+import {
+  OpenIDAuthenticationService
+} from '../../../commons/session/authentication/cognito_hosted_ui/OpenIDAuthenticationService';
 
 @Component({
   selector: 'app-after-login-page',

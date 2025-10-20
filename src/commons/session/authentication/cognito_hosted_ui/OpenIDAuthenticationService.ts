@@ -60,7 +60,6 @@ export class OpenIDAuthenticationService {
 
           if(!this.isAuthenticated) {
             this._onRedirectToLogin();
-            return this.isAuthenticated;
           }
 
           return this.isAuthenticated;

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import {LoginCheckPageComponent} from './pages/login-check-page/login-check-page.component';
 import {KeyringIndexPageComponent} from './pages/keyring-index-page/keyring-index-page.component';
-import {AuthenticationGuard} from '../commons/session/authentication/AuthenticationGuard';
 import {AfterLoginPageComponent} from './pages/after-login-page/after-login-page.component';
+import {XihucalliAuthenticationGuard} from '../commons/session/authentication/xihucalli/XiucalliAuthenticationGuard';
 
 export const routes: Routes = [
   {
@@ -21,6 +21,6 @@ export const routes: Routes = [
   {
     path: "keyring",
     component: KeyringIndexPageComponent,
-    canActivate: [AuthenticationGuard]
+    canActivate: [XihucalliAuthenticationGuard]
   }
 ];

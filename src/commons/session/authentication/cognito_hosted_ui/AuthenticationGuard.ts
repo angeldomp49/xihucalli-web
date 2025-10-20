@@ -9,7 +9,7 @@ import {
 import {Injectable} from '@angular/core';
 import {OpenIDAuthenticationService} from './OpenIDAuthenticationService';
 import {take} from 'rxjs';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

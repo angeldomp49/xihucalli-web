@@ -3,7 +3,10 @@
     <app-spinner></app-spinner>
   </div>
   <div class="login-action-container" style="text-align:center; margin-top: 2rem;" *ngIf="!loading">
-    <button (click)="startLogin()" class="btn btn-primary">Iniciar sesión</button>
+
     <p style="margin-top:1rem;">Tu sesión ha expirado o no es válida. Por favor, inicia sesión nuevamente.</p>
+    <button (click)="startLoginWithCognito()" class="btn btn-primary">Iniciar sesión con Cognito</button>
+    <button (click)="startLoginWithGoogle()" class="btn btn-primary">Iniciar sesión con google</button>
+    <button (click)="startLoginWithFacebook()" class="btn btn-primary">Iniciar sesión con Facebook</button>
   </div>
 </div>
