@@ -12,9 +12,9 @@ export class GoogleOpenIDAuthenticationService implements OpenIDIdentityProvider
 
   private readonly oidcSecurityService = inject(OidcSecurityService);
 
-  configuration$ = this.oidcSecurityService.getConfiguration();
+  configuration$ = this.oidcSecurityService.getConfiguration(IDENTITY_PROVIDER_GOOGLE);
 
-  userData$ = this.oidcSecurityService.userData$;
+  userData$ = this.oidcSecurityService.getUserData(IDENTITY_PROVIDER_GOOGLE);
 
   isAuthenticated: boolean = false;
 
@@ -25,26 +25,29 @@ export class GoogleOpenIDAuthenticationService implements OpenIDIdentityProvider
   }
 
   public login(): void {
-    this.oidcSecurityService.authorize();
+    this.oidcSecurityService.authorize(IDENTITY_PROVIDER_GOOGLE);
   }
 
   public completeAuthentication(): Observable<void> {
-    return new Observable(observer => {
-      this.oidcSecurityService.checkAuth();
-      observer.next();
-    });
+    return new Observable(observer =>
+      this.oidcSecurityService
+        .checkAuth(window.location.href, IDENTITY_PROVIDER_GOOGLE)
+        .subscribe( response =>
+          observer.next()
+        )
+    );
   }
 
   logout(): void {
     if (window.sessionStorage) {
       window.sessionStorage.clear();
     }
-    this.oidcSecurityService.logoff().subscribe();
+    this.oidcSecurityService.logoff(IDENTITY_PROVIDER_GOOGLE).subscribe();
   }
 
   public performSessionValidityCheck(): Observable<boolean> {
     return this.oidcSecurityService
-      .checkAuth()
+      .checkAuth(IDENTITY_PROVIDER_GOOGLE)
       .pipe(
         map((loginResponse: LoginResponse) => {
 
@@ -63,7 +66,7 @@ export class GoogleOpenIDAuthenticationService implements OpenIDIdentityProvider
 
   public readAccessToken(): Observable<Optional<string|null>>{
     return this.oidcSecurityService
-      .getAccessToken()
+      .getAccessToken(IDENTITY_PROVIDER_GOOGLE)
       .pipe(map( token => Optional.of(token)));
   }
 
