@@ -9,6 +9,6 @@ export const environment = {
   remoteHostname: 'https://d3udo965unl57n.cloudfront.net',
   cognitoAuthorityUrl: 'https://cognito-idp.us-east-2.amazonaws.com',
   cognitoUsersPoolId: 'us-east-2_vcCumL63M',
-  xihucalliAuthAPIHostname: 'https://xihucalli.dev.makechtec.cloud/auht-api',
+  xihucalliAuthAPIHostname: 'https://udzb97yyve.execute-api.us-east-2.amazonaws.com/xihucalli/user',
   xihucalliClientID: 'mockclientid'
 };

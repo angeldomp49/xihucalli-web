@@ -95,6 +95,10 @@ export class XihucalliAuthenticationService {
           }
         ).pipe(
           map((tokenResponse: XihucalliTokenResponse) => {
+
+            console.log("token response");
+            console.log(tokenResponse);
+
             localStorage.setItem(this.XIHUCALLI_ACCESS_TOKEN_LOCAL_STORAGE_KEY, tokenResponse.accessToken)
 
             return tokenResponse;
