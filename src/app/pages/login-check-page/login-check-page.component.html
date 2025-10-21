@@ -2,7 +2,7 @@
   <div *ngIf="loading">
     <app-spinner></app-spinner>
   </div>
-  <div class="login-action-container" style="text-align:center; margin-top: 2rem;" *ngIf="!loading">
+  <div *ngIf="!loading" class="login-action-container" style="text-align:center; margin-top: 2rem;">
 
     <p style="margin-top:1rem;">Tu sesión ha expirado o no es válida. Por favor, inicia sesión nuevamente.</p>
     <button (click)="startLoginWithCognito()" class="btn btn-primary">Iniciar sesión con Cognito</button>

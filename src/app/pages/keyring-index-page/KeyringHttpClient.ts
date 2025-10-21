@@ -6,33 +6,34 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class KeyringHttpClient{
+export class KeyringHttpClient {
 
   private readonly keyringsURL = "/keyring";
   private readonly registerKeyringURL = "/password-register";
   private readonly getPasswordUrl = "/keyring/{keyring_id}/password";
 
-  public constructor(private apiHttpClient: ApiHttpClient) {}
+  public constructor(private apiHttpClient: ApiHttpClient) {
+  }
 
-  public getAllKeyrings(): Observable<KeyringType[]>{
+  public getAllKeyrings(): Observable<KeyringType[]> {
 
     return new Observable(observer => {
       this.apiHttpClient
         .getRequestToResource(this.keyringsURL)
-        .subscribe( flatResponse => {
+        .subscribe(flatResponse => {
           observer.next(flatResponse);
-        } );
+        });
     });
 
   }
 
-  public registerNewKeyring(keyring: KeyringType): Observable<any>{
+  public registerNewKeyring(keyring: KeyringType): Observable<any> {
 
     return this.apiHttpClient
       .postToResource(this.registerKeyringURL, JSON.stringify(keyring));
   }
 
-  public getPasswordForKeyring(keyringId: string): Observable<any>{
+  public getPasswordForKeyring(keyringId: string): Observable<any> {
     return this.apiHttpClient
       .getRequestToResource(this.getPasswordUrl.replace("{keyring_id}", keyringId));
   }

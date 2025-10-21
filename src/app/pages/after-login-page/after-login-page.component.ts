@@ -3,8 +3,11 @@ import {Router} from '@angular/router';
 import {NgIf} from '@angular/common';
 import {SpinnerComponent} from '../../../commons/spinner/spinner.component';
 import {
-  OpenIDAuthenticationService
-} from '../../../commons/session/authentication/cognito_hosted_ui/OpenIDAuthenticationService';
+  OpenIDIdentityProviderSelector
+} from '../../../commons/session/authentication/identity_providers/OpenIDIdentityProviderSelector';
+import {
+  XihucalliAuthenticationService
+} from '../../../commons/session/authentication/xihucalli/XihucalliAuthenticationService';
 
 @Component({
   selector: 'app-after-login-page',
@@ -20,19 +23,30 @@ export class AfterLoginPageComponent implements OnInit {
   public loading = false;
 
   public constructor(
-    private openIDAuthenticationService: OpenIDAuthenticationService,
+    private providerSelector: OpenIDIdentityProviderSelector,
+    private xihucalliAuthService: XihucalliAuthenticationService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
 
     this.loading = true;
 
-    this.openIDAuthenticationService
-      .completeAuthenticationProcess()
-      .subscribe( loginResponse => {
-        console.log(loginResponse);
-        this.router.navigate(['/keyring']);
+    const provider = this.providerSelector.getProvider().value();
+
+    if (!provider) {
+      console.error('No identity provider selected');
+      return;
+    }
+
+    provider.completeAuthentication()
+      .subscribe(() => {
+        this.xihucalliAuthService.performTokenExchange()
+          .subscribe(tokenResponse => {
+            console.log('Token exchange successful:', tokenResponse);
+            this.router.navigate(['/keyring']);
+          });
       });
 
   }

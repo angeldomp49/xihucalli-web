@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AfterLoginPageComponent } from './after-login-page.component';
+import {AfterLoginPageComponent} from './after-login-page.component';
 
 describe('AfterLoginPageComponent', () => {
   let component: AfterLoginPageComponent;
@@ -10,7 +10,7 @@ describe('AfterLoginPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AfterLoginPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AfterLoginPageComponent);
     component = fixture.componentInstance;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { KeyringIndexPageComponent } from './keyring-index-page.component';
+import {KeyringIndexPageComponent} from './keyring-index-page.component';
 
 describe('KeyringIndexPageComponent', () => {
   let component: KeyringIndexPageComponent;
@@ -10,7 +10,7 @@ describe('KeyringIndexPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [KeyringIndexPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(KeyringIndexPageComponent);
     component = fixture.componentInstance;

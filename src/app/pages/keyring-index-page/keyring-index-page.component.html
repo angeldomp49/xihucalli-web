@@ -1,10 +1,10 @@
 <div class="container keyrings-page">
 
   <div class="keyring-action-button-group">
-    <button type="button" class="keyring-new-form" (click)="openModal()">Add a new keyring</button>
+    <button (click)="openModal()" class="keyring-new-form" type="button">Add a new keyring</button>
   </div>
 
-  <app-keyring-new-form *ngIf="showModal" (closeModal)="closeModal()"></app-keyring-new-form>
+  <app-keyring-new-form (closeModal)="closeModal()" *ngIf="showModal"></app-keyring-new-form>
 
   <table class="keyrings-table">
     <thead>
@@ -17,15 +17,15 @@
     </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let keyring of keyringsList">
-        <td>{{keyring.title}}</td>
-        <td>{{keyring.username}}</td>
-        <td>
-          <button (click)="copyPassword(keyring.id)" >Copy password</button>
-        </td>
-        <td>{{keyring.url}}</td>
-        <td>{{keyring.description}}</td>
-      </tr>
+    <tr *ngFor="let keyring of keyringsList">
+      <td>{{ keyring.title }}</td>
+      <td>{{ keyring.username }}</td>
+      <td>
+        <button (click)="copyPassword(keyring.id)">Copy password</button>
+      </td>
+      <td>{{ keyring.url }}</td>
+      <td>{{ keyring.description }}</td>
+    </tr>
     </tbody>
   </table>
 </div>

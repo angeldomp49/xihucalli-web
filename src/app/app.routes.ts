@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {LoginCheckPageComponent} from './pages/login-check-page/login-check-page.component';
 import {KeyringIndexPageComponent} from './pages/keyring-index-page/keyring-index-page.component';
 import {AfterLoginPageComponent} from './pages/after-login-page/after-login-page.component';

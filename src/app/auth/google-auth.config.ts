@@ -1,20 +1,20 @@
 import {PassedInitialConfig} from 'angular-auth-oidc-client';
 import {environment} from '../../environments/environment';
 
-export const authConfig: PassedInitialConfig = {
+export const googleAuthConfig: PassedInitialConfig = {
   config: {
-    authority: `${environment.cognitoAuthorityUrl}/${environment.cognitoUsersPoolId}`,
+    authority: 'https://accounts.google.com',
     redirectUrl: `${environment.remoteHostname}/after-login`,
     postLogoutRedirectUri: window.location.origin,
-    clientId: environment.cognitoClientId,
-    usePushedAuthorisationRequests: false,
-    scope: 'email openid profile',
+    clientId: environment.googleClientId,
+    scope: 'openid profile email',
     responseType: 'code',
     silentRenew: true,
     useRefreshToken: true,
-    ignoreNonceAfterRefresh: true,
+    autoUserInfo: true,
     customParamsAuthRequest: {
       prompt: 'consent',
     },
   }
 }
+

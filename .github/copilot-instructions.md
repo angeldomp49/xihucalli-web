@@ -1,6 +1,7 @@
 # Copilot Instructions (Shared Context)
 
 ## Programming Language
+
 - Typescript
 - Angular Framework
 
@@ -20,11 +21,10 @@
 - Ensure you use guard clauses to reduce nesting over if-else statements.
 - Ensure you don't use inheritance at all, when you need to share code between classes use composition instead.
 
-
 ## Documentation
 
 - For each new functionality added to the codebase, add the necessary documentation.
-- Ensure the documentation is centered in the main functionalities, not specifically 
+- Ensure the documentation is centered in the main functionalities, not specifically
   in a specific package, class or method.
 - Ensure the documentation have at least one example of usage for the added functionality.
 - Ensure the documentation is in Markdown format.

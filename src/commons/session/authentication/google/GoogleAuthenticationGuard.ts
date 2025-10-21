@@ -7,18 +7,18 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import {Injectable} from '@angular/core';
-import {CognitoOpenIDAuthenticationService} from './CognitoOpenIDAuthenticationService';
+import {GoogleOpenIDAuthenticationService} from './GoogleOpenIDAuthenticationService';
 import {take} from 'rxjs';
 import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationGuard implements CanActivate {
+export class GoogleAuthenticationGuard implements CanActivate {
 
   public constructor(
     private router: Router,
-    private openIDAuthenticationService: CognitoOpenIDAuthenticationService
+    private googleOpenIDAuthenticationService: GoogleOpenIDAuthenticationService
   ) {
   }
 
@@ -28,12 +28,12 @@ export class AuthenticationGuard implements CanActivate {
       return true;
     }
 
-    this.openIDAuthenticationService
+    this.googleOpenIDAuthenticationService
       .setOnRedirectToLogin(() => {
         this.router.navigate([environment.loginEndpoint]);
       })
 
-    return this.openIDAuthenticationService
+    return this.googleOpenIDAuthenticationService
       .performAuthCheck()
       .pipe(
         take(1)
@@ -41,3 +41,4 @@ export class AuthenticationGuard implements CanActivate {
   }
 
 }
+

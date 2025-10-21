@@ -18,17 +18,18 @@ export class XihucalliAuthenticationGuard implements CanActivate {
   constructor(
     private router: Router,
     private xihucalliAuthenticationService: XihucalliAuthenticationService
-  ){}
+  ) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<GuardResult> {
 
     this.xihucalliAuthenticationService
-      .setOnRedirectToLogin( () =>
+      .setOnRedirectToLogin(() =>
         this.router.navigate([environment.loginEndpoint])
       );
 
     return this.xihucalliAuthenticationService
-      .performAuthCheck()
+      .performSessionValidityCheck()
       .pipe(
         take(1)
       );

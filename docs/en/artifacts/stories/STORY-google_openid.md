@@ -32,7 +32,7 @@ You wil implement the google authentication by using the openid specifications i
 access token.
 
 After the success login process you will call a custom api service called "xihucalli authentication" which has an endpoint
-"xihucalli/user/info", thus get an a custom access token with the xihucalli user. the request should have the authorization and 
+"xihucalli/user/info", thus get an a custom access token with the xihucalli user. the request should have the authorization and
 "x-identity-provider" headers where authorization is the current access token, the other is the name of the identity provider
 that serves to tell xihucalli from where the token is.
 

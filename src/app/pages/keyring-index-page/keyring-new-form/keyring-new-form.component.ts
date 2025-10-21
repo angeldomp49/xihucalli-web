@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {KeyringHttpClient} from '../KeyringHttpClient';
 
@@ -21,7 +21,8 @@ export class KeyringNewFormComponent {
   public url = '';
   public description = '';
 
-  public constructor(private keyringHttpClient: KeyringHttpClient) {}
+  public constructor(private keyringHttpClient: KeyringHttpClient) {
+  }
 
   onBackgroundClick(event: MouseEvent) {
     if ((event.target as HTMLElement).classList.contains('modal-background')) {
@@ -35,7 +36,7 @@ export class KeyringNewFormComponent {
 
   onSubmit() {
 
-    if(this.password != this.passwordConfirmation) {
+    if (this.password != this.passwordConfirmation) {
       alert('Passwords don\'t match');
       return;
     }
@@ -51,9 +52,9 @@ export class KeyringNewFormComponent {
 
     this.keyringHttpClient
       .registerNewKeyring(keyring)
-      .subscribe( (response) => {
+      .subscribe((response) => {
         this.closeModal.emit();
-      } );
+      });
 
   }
 }

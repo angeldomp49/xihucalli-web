@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {KeyringPasswordType, KeyringType} from './KeyringType';
+import {KeyringType} from './KeyringType';
 import {KeyringHttpClient} from './KeyringHttpClient';
 import {NgForOf, NgIf} from '@angular/common';
 import {KeyringNewFormComponent} from './keyring-new-form/keyring-new-form.component';
@@ -16,17 +16,18 @@ import {KeyringNewFormComponent} from './keyring-new-form/keyring-new-form.compo
 })
 export class KeyringIndexPageComponent implements OnInit {
 
-  protected keyringsList: KeyringType[] = [];
   public showModal: boolean = false;
+  protected keyringsList: KeyringType[] = [];
 
-  public constructor(private keyringHttpClient: KeyringHttpClient) {}
+  public constructor(private keyringHttpClient: KeyringHttpClient) {
+  }
 
   ngOnInit(): void {
-        this.keyringHttpClient
-          .getAllKeyrings()
-          .subscribe( (result: KeyringType[]) => {
-            this.keyringsList = result;
-          } );
+    this.keyringHttpClient
+      .getAllKeyrings()
+      .subscribe((result: KeyringType[]) => {
+        this.keyringsList = result;
+      });
   }
 
   openModal() {
@@ -40,7 +41,7 @@ export class KeyringIndexPageComponent implements OnInit {
   copyPassword(keyringId: string) {
     this.keyringHttpClient
       .getPasswordForKeyring(keyringId)
-      .subscribe((result: {password: string}) => {
+      .subscribe((result: { password: string }) => {
 
         navigator.clipboard.writeText(this.formatPassword(result.password))
 
@@ -50,7 +51,7 @@ export class KeyringIndexPageComponent implements OnInit {
       })
   }
 
-  formatPassword(password: string): string{
+  formatPassword(password: string): string {
     return atob(password);
   }
 

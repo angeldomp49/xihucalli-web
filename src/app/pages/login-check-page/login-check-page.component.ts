@@ -4,8 +4,14 @@ import {NgIf} from '@angular/common';
 import {SpinnerComponent} from '../../../commons/spinner/spinner.component';
 import {environment} from '../../../environments/environment';
 import {
-  OpenIDAuthenticationService
-} from '../../../commons/session/authentication/cognito_hosted_ui/OpenIDAuthenticationService';
+  CognitoOpenIDAuthenticationService
+} from '../../../commons/session/authentication/cognito_hosted_ui/CognitoOpenIDAuthenticationService';
+import {
+  GoogleOpenIDAuthenticationService
+} from '../../../commons/session/authentication/google/GoogleOpenIDAuthenticationService';
+import {
+  OpenIDIdentityProviderSelector
+} from '../../../commons/session/authentication/identity_providers/OpenIDIdentityProviderSelector';
 
 @Component({
   selector: 'app-login-chech-page',
@@ -22,35 +28,44 @@ export class LoginCheckPageComponent implements OnInit {
 
   public constructor(
     private router: Router,
-    private openIDAuthenticationService: OpenIDAuthenticationService
-  ){}
+    private cognitoAuthenticationService: CognitoOpenIDAuthenticationService,
+    private googleAuthenticationService: GoogleOpenIDAuthenticationService,
+    private providerSelector: OpenIDIdentityProviderSelector
+  ) {
+  }
 
   ngOnInit() {
 
-    if(!environment.isAuthenticationEnabled){
+    if (!environment.isAuthenticationEnabled) {
       this.router.navigate([environment.homeEndpoint]);
       console.log("Authentication is disabled");
       return;
     }
 
-    this.openIDAuthenticationService
-      .performAuthCheck()
-      .subscribe( (isAuthenticated: boolean) => {
+    const provider = this.providerSelector.getProvider().value();
 
-        if(isAuthenticated){
-          this.router.navigate([environment.homeEndpoint]);
-        }
+    if (provider) {
+      provider.performSessionValidityCheck()
+        .subscribe((isAuthenticated: boolean) => {
 
-      } );
+          if (isAuthenticated) {
+            this.router.navigate([environment.homeEndpoint]);
+          }
+
+        });
+    }
   }
 
   public startLoginWithCognito() {
     this.loading = true;
-    this.openIDAuthenticationService.login();
+    this.providerSelector.setProvider(this.cognitoAuthenticationService);
+    this.cognitoAuthenticationService.login();
   }
 
   public startLoginWithGoogle() {
     this.loading = true;
+    this.providerSelector.setProvider(this.googleAuthenticationService);
+    this.googleAuthenticationService.login();
   }
 
   public startLoginWithFacebook() {

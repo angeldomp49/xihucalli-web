@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { KeyringNewFormComponent } from './keyring-new-form.component';
+import {KeyringNewFormComponent} from './keyring-new-form.component';
 
 describe('KeyringNewFormComponent', () => {
   let component: KeyringNewFormComponent;
@@ -10,7 +10,7 @@ describe('KeyringNewFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [KeyringNewFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(KeyringNewFormComponent);
     component = fixture.componentInstance;
