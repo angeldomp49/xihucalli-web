@@ -47,7 +47,7 @@ export class GoogleOpenIDAuthenticationService implements OpenIDIdentityProvider
 
   public performSessionValidityCheck(): Observable<boolean> {
     return this.oidcSecurityService
-      .checkAuth(IDENTITY_PROVIDER_GOOGLE)
+      .checkAuth(window.location.href, IDENTITY_PROVIDER_GOOGLE)
       .pipe(
         map((loginResponse: LoginResponse) => {
 

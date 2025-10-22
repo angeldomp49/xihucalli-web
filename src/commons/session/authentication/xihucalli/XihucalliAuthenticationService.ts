@@ -81,6 +81,7 @@ export class XihucalliAuthenticationService {
 
     return provider.readAccessToken().pipe(
       switchMap(accessTokenOptional => {
+
         const accessToken = accessTokenOptional.value();
 
         const headers: any = {
@@ -89,8 +90,11 @@ export class XihucalliAuthenticationService {
           "X-Identity-Provider": provider.getIdentityProviderName()
         };
 
-        return this.httpClient.get<XihucalliTokenResponse>(
-          environment.xihucalliAuthAPIHostname + this.XIHUCALLI_API_TOKEN_EXCHANGE_URI, {
+        console.log("headers");
+        console.log(headers);
+
+        return this.httpClient.post<XihucalliTokenResponse>(
+          environment.xihucalliAuthAPIHostname + this.XIHUCALLI_API_TOKEN_EXCHANGE_URI, {}, {
             headers: headers
           }
         ).pipe(

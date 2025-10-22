@@ -51,7 +51,7 @@ export class CognitoOpenIDAuthenticationService implements OpenIDIdentityProvide
 
   public performSessionValidityCheck(): Observable<boolean> {
     return this.oidcSecurityService
-      .checkAuth(IDENTITY_PROVIDER_COGNITO)
+      .checkAuth(window.location.href, IDENTITY_PROVIDER_COGNITO)
       .pipe(
         map((loginResponse: LoginResponse) => {
 
