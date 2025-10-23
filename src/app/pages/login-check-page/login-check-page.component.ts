@@ -75,6 +75,9 @@ export class LoginCheckPageComponent implements OnInit {
   }
 
   public startServerAuth(){
+
+    console.log("Starting server auth");
+
     this.loading = true;
 
     const providerInstance = this.providerSelector.getProvider().value();
@@ -87,15 +90,13 @@ export class LoginCheckPageComponent implements OnInit {
       providerName = stored ? stored : null;
     }
 
-    if (!providerName) {
-      this.loading = false;
-      return;
-    }
+    providerName = "GOOGLE";
 
-    const providerParam = providerName.toLowerCase();
+    const providerParam = providerName;
+    const redirectUrl = environment.remoteHostname + "/after-login";
 
     this.apiHttpClient
-      .getRequestToResource(`/xihucalli/user/auth/initiate?provider=${providerParam}`)
+      .getRequestToResource(`/user/auth/initiate?provider=${providerParam}&redirect_url=${redirectUrl}`)
       .subscribe(
         (response: any) => {
           const authorizationUrl = response?.message?.authorization_url || response?.message?.authorizationUrl || response?.authorization_url || response?.authorizationUrl;
