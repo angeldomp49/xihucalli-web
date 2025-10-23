@@ -12,6 +12,7 @@ import {
 import {
   OpenIDIdentityProviderSelector
 } from '../../../commons/session/authentication/identity_providers/OpenIDIdentityProviderSelector';
+import {ApiHttpClient} from '../../../commons/http/ApiHttpClient';
 
 @Component({
   selector: 'app-login-chech-page',
@@ -30,7 +31,8 @@ export class LoginCheckPageComponent implements OnInit {
     private router: Router,
     private cognitoAuthenticationService: CognitoOpenIDAuthenticationService,
     private googleAuthenticationService: GoogleOpenIDAuthenticationService,
-    private providerSelector: OpenIDIdentityProviderSelector
+    private providerSelector: OpenIDIdentityProviderSelector,
+    private apiHttpClient: ApiHttpClient
   ) {
   }
 
@@ -70,6 +72,43 @@ export class LoginCheckPageComponent implements OnInit {
 
   public startLoginWithFacebook() {
     this.loading = true;
+  }
+
+  public startServerAuth(){
+
+    console.log("Starting server auth");
+
+    this.loading = true;
+
+    const providerInstance = this.providerSelector.getProvider().value();
+    let providerName: string | null = null;
+
+    if (providerInstance) {
+      providerName = providerInstance.getIdentityProviderName();
+    } else if (this.providerSelector.hasStoredProviderName()) {
+      const stored = this.providerSelector.getStoredProviderName().value();
+      providerName = stored ? stored : null;
+    }
+
+    providerName = "GOOGLE";
+
+    const providerParam = providerName;
+    const redirectUrl = environment.remoteHostname + "/after-login";
+
+    this.apiHttpClient
+      .getRequestToResource(`/user/auth/initiate?provider=${providerParam}&redirect_url=${redirectUrl}`)
+      .subscribe(
+        (response: any) => {
+          const authorizationUrl = response?.message?.authorization_url || response?.message?.authorizationUrl || response?.authorization_url || response?.authorizationUrl;
+          if (authorizationUrl) {
+            window.location.href = authorizationUrl;
+            return;
+          }
+          this.loading = false;
+        },
+        () => this.loading = false
+      );
+
   }
 
 }

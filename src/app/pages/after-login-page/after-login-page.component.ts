@@ -48,23 +48,30 @@ export class AfterLoginPageComponent implements OnInit {
 
     const provider = this.providerSelector.getProvider().value();
 
-    if (!provider) {
-      console.error('No identity provider selected');
-      this.router.navigate(['/login-check']);
-      return;
-    }
+    console.log("to continue xihucalli authentication");
 
-    provider.completeAuthentication()
-      .subscribe(() => {
+    const url = new URL(window.location.href);
+    const queryParams = Object.fromEntries(url.searchParams.entries());
+    const fragmentParams = Object.fromEntries(new URLSearchParams(url.hash.replace(/^#/, '')).entries());
+    console.log('queryParams:', queryParams, 'fragmentParams:', fragmentParams);
 
-        console.log("The login process will complete")
+    // if (!provider) {
+    //   console.error('No identity provider selected');
+    //   this.router.navigate(['/login-check']);
+    //   return;
+    // }
 
-        this.xihucalliAuthService.performTokenExchange()
-          .subscribe(tokenResponse => {
-            console.log('Token exchange successful:', tokenResponse);
-            this.router.navigate(['/keyring']);
-          });
-      });
+    // provider.completeAuthentication()
+    //   .subscribe(() => {
+    //
+    //     console.log("The login process will complete")
+    //
+    //     this.xihucalliAuthService.performTokenExchange()
+    //       .subscribe(tokenResponse => {
+    //         console.log('Token exchange successful:', tokenResponse);
+    //         this.router.navigate(['/keyring']);
+    //       });
+    //   });
 
   }
 
