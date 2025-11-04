@@ -40,9 +40,3 @@ export const routes: Routes = [
   }
 ];
 
-    canActivate: [openIDAuthGuard]
-    component: KeyringIndexPageComponent,
-    canActivate: [openIDAuthGuard]
-  }
-];
-
