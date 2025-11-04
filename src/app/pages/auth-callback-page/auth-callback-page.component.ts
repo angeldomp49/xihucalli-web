@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { SpinnerComponent } from '../../../commons/spinner/spinner.component';
 import { AuthCallbackParamsExtractor } from '../../../commons/session/authentication/utils/AuthCallbackParamsExtractor';
-import { TokenStorageService } from '../../../commons/session/token/TokenStorageService';
+import { SessionManagementService } from '../../../commons/session/management/SessionManagementService';
 import { AuthCallbackParams } from '../../../commons/session/authentication/types';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-auth-callback-page',
@@ -23,7 +24,7 @@ export class AuthCallbackPageComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly paramsExtractor: AuthCallbackParamsExtractor,
+    private readonly sessionManagement: SessionManagementService
     private readonly tokenStorage: TokenStorageService
   ) {}
 
@@ -71,8 +72,8 @@ export class AuthCallbackPageComponent implements OnInit {
       this.handleError({ error: 'No token received from server' });
       return;
     }
-
-    this.tokenStorage.storeToken(params.token);
+    this.sessionManagement.login(params.token);
+    this.router.navigate([environment.homeEndpoint]);
     this.router.navigate(['/keyring']);
   }
 
