@@ -86,6 +86,22 @@ export class TokenStorageService {
     const payload = this.getTokenPayload();
     return payload?.username || null;
   }
+
+  getTokenExpirationTime(): number | null {
+    const payload = this.getTokenPayload();
+    return payload?.exp || null;
+  }
+
+  isTokenExpiringSoon(bufferSeconds: number = 300): boolean {
+    const expirationTime = this.getTokenExpirationTime();
+
+    if (!expirationTime) {
+      return false;
+    }
+
+    const currentTime = Math.floor(Date.now() / 1000);
+    return (expirationTime - currentTime) <= bufferSeconds;
+  }
 }
 export interface AuthInitiateResponse {
   authorization_url: string;
