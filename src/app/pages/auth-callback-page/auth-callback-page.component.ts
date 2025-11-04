@@ -24,8 +24,8 @@ export class AuthCallbackPageComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly router: Router,
-    private readonly sessionManagement: SessionManagementService
-    private readonly tokenStorage: TokenStorageService
+    private readonly sessionManagement: SessionManagementService,
+    private readonly paramsExtractor: AuthCallbackParamsExtractor
   ) {}
 
   ngOnInit(): void {
@@ -74,7 +74,6 @@ export class AuthCallbackPageComponent implements OnInit {
     }
     this.sessionManagement.login(params.token);
     this.router.navigate([environment.homeEndpoint]);
-    this.router.navigate(['/keyring']);
   }
 
   private handleRegistrationRequired(params: AuthCallbackParams): void {

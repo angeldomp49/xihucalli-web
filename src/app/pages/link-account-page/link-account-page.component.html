@@ -1,1 +1,73 @@
-<p>link-account-page works!</p>
+<div class="link-account-container">
+  <div class="link-account-card">
+    <h1>Account Found</h1>
+
+    <div *ngIf="errorMessage && !loading" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
+
+    <div *ngIf="!showRegistrationForm && !loading" class="matching-account">
+      <p class="subtitle">We found an existing account that might be yours:</p>
+      <div class="account-info">
+        <div class="icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <h2>{{ matchingDisplayName || 'Unknown User' }}</h2>
+      </div>
+      <p class="question">Is this your account?</p>
+      <div class="button-group">
+        <button type="button" class="btn btn-primary" (click)="onAcceptLink()">
+          Yes, link to this account
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="onRejectLink()">
+          No, create a new account
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="showRegistrationForm && !loading" class="registration-form">
+      <p class="subtitle">Create your new profile:</p>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmitNewAccount()">
+        <div class="form-group">
+          <label for="displayName">Display Name</label>
+          <input
+            type="text"
+            id="displayName"
+            formControlName="displayName"
+            placeholder="Enter your display name"
+            [class.invalid]="isFieldInvalid('displayName')"
+          />
+          <span class="error-text" *ngIf="isFieldInvalid('displayName')">
+            {{ getFieldError('displayName') }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            placeholder="Enter your username"
+            [class.invalid]="isFieldInvalid('username')"
+          />
+          <span class="error-text" *ngIf="isFieldInvalid('username')">
+            {{ getFieldError('username') }}
+          </span>
+          <span class="hint">Only letters, numbers, hyphens, and underscores allowed</span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" [disabled]="loading">
+          Create New Account
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+      <app-spinner></app-spinner>
+      <p>Processing your request...</p>
+    </div>
+  </div>
+</div>
+
