@@ -1,0 +1,11 @@
+<div class="auth-callback-container">
+  <div *ngIf="loading" class="loading-state">
+    <app-spinner></app-spinner>
+    <p>Processing authentication...</p>
+  </div>
+  <div *ngIf="!loading && errorMessage" class="error-state">
+    <h2>Authentication Error</h2>
+    <p>{{ errorMessage }}</p>
+    <p>Redirecting to login page...</p>
+  </div>
+</div>
