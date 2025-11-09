@@ -5,7 +5,7 @@ import {AfterLoginPageComponent} from './pages/after-login-page/after-login-page
 import {AuthCallbackPageComponent} from './pages/auth-callback-page/auth-callback-page.component';
 import {RegisterPageComponent} from './pages/register-page/register-page.component';
 import {LinkAccountPageComponent} from './pages/link-account-page/link-account-page.component';
-import {openIDAuthGuard} from '../commons/session/authentication';
+import {openIDAuthGuard} from '../commons/session';
 
 export const routes: Routes = [
   {
