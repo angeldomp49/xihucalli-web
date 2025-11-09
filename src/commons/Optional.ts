@@ -11,10 +11,6 @@ export class Optional<T> {
     return new Optional(child);
   }
 
-  public isEmpty(): boolean {
-    return !this.child;
-  }
-
   public isPresent(): boolean {
     return !!this.child;
   }

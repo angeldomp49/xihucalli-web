@@ -1,0 +1,45 @@
+<div class="register-container">
+  <div class="register-card">
+    <h1>Complete Your Registration</h1>
+    <p class="subtitle">Create your profile to finish setting up your account</p>
+    <div *ngIf="errorMessage && !loading" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+      <div class="form-group">
+        <label for="displayName">Display Name</label>
+        <input
+          type="text"
+          id="displayName"
+          formControlName="displayName"
+          placeholder="Enter your display name"
+          [class.invalid]="isFieldInvalid('displayName')"
+        />
+        <span class="error-text" *ngIf="isFieldInvalid('displayName')">
+          {{ getFieldError('displayName') }}
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          placeholder="Enter your username"
+          [class.invalid]="isFieldInvalid('username')"
+        />
+        <span class="error-text" *ngIf="isFieldInvalid('username')">
+          {{ getFieldError('username') }}
+        </span>
+        <span class="hint">Only letters, numbers, hyphens, and underscores allowed</span>
+      </div>
+      <button type="submit" class="submit-btn" [disabled]="loading">
+        Complete Registration
+      </button>
+    </form>
+    <div *ngIf="loading" class="loading-state">
+      <app-spinner></app-spinner>
+      <p>Creating your account...</p>
+    </div>
+  </div>
+</div>

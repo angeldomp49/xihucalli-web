@@ -4,7 +4,8 @@ import {routes} from './app.routes';
 import {cognitoAuthConfig} from './auth/cognito-auth.config';
 import {googleAuthConfig} from './auth/google-auth.config';
 import {provideAuth} from 'angular-auth-oidc-client';
-import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClient, withInterceptors} from '@angular/common/http';
+import {authInterceptor} from '../commons/session/interceptors/AuthInterceptor';
 
 const combinedAuthConfig = {
   config: [
@@ -18,6 +19,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
     provideAuth(combinedAuthConfig as any),
-    provideHttpClient()
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
   ]
 };

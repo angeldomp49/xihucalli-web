@@ -44,10 +44,14 @@ export class LoginCheckPageComponent implements OnInit {
       return;
     }
 
-    const provider = this.providerSelector.getProvider().value();
+    const provider = this.providerSelector.getProvider();
+    const providerValue = provider.value();
 
-    if (provider) {
-      provider.performSessionValidityCheck()
+    if(providerValue === null){
+      return;
+    }
+
+    providerValue.performSessionValidityCheck()
         .subscribe((isAuthenticated: boolean) => {
 
           if (isAuthenticated) {
@@ -55,7 +59,7 @@ export class LoginCheckPageComponent implements OnInit {
           }
 
         });
-    }
+
   }
 
   public startLoginWithCognito() {

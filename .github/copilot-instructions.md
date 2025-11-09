@@ -31,3 +31,10 @@
 - Ensure the documentation is in English.
 - Ensure the documentation has translations to Spanish and French.
 - Ensure the documentation is in a `docs` folder at the root of the project.
+
+
+
+## Custom Project Information
+
+- You may use the Angular CLI to automate the most tasks, this is installed in the project.
+- Also you may use NPM scripts and commands, this is also installed in the project.

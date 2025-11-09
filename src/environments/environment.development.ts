@@ -10,5 +10,9 @@ export const environment = {
   cognitoAuthorityUrl: 'https://cognito-idp.us-east-2.amazonaws.com',
   cognitoUsersPoolId: 'us-east-2_vcCumL63M',
   xihucalliAuthAPIHostname: 'https://14xtw3qge5.execute-api.us-east-2.amazonaws.com/xihucalli/user',
-  xihucalliClientID: 'mockclientid'
+  xihucalliClientID: 'mockclientid',
+  authInitiateEndpoint: '/auth/openid/initiate',
+  authCallbackEndpoint: '/auth/openid/callback',
+  authRegisterEndpoint: '/register',
+  callbackRedirectUrl: 'https://d3udo965unl57n.cloudfront.net/auth/callback'
 };
