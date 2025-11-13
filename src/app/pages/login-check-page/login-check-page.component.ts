@@ -100,7 +100,7 @@ export class LoginCheckPageComponent implements OnInit {
     const redirectUrl = environment.remoteHostname + "/after-login";
 
     this.apiHttpClient
-      .getRequestToResource(`/user/auth/initiate?provider=${providerParam}&redirect_url=${redirectUrl}`)
+      .getRequestToResource(`${environment.authInitiateEndpoint}?provider=${providerParam}&redirect_url=${redirectUrl}`)
       .subscribe(
         (response: any) => {
           const authorizationUrl = response?.message?.authorization_url || response?.message?.authorizationUrl || response?.authorization_url || response?.authorizationUrl;
