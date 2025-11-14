@@ -97,7 +97,7 @@ export class LoginCheckPageComponent implements OnInit {
     providerName = "GOOGLE";
 
     const providerParam = providerName;
-    const redirectUrl = environment.remoteHostname + "/after-login";
+    const redirectUrl = encodeURI(environment.remoteHostname + "/after-login");
 
     this.apiHttpClient
       .getRequestToResource(`${environment.authInitiateEndpoint}?provider=${providerParam}&redirect_url=${redirectUrl}`)
