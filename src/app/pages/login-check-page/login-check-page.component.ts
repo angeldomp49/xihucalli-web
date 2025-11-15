@@ -13,6 +13,7 @@ import {
   OpenIDIdentityProviderSelector
 } from '../../../commons/session/authentication/identity_providers/OpenIDIdentityProviderSelector';
 import {ApiHttpClient} from '../../../commons/http/ApiHttpClient';
+import {catchError} from 'rxjs';
 
 @Component({
   selector: 'app-login-chech-page',
@@ -101,17 +102,26 @@ export class LoginCheckPageComponent implements OnInit {
 
     this.apiHttpClient
       .getRequestToResource(`${environment.authInitiateEndpoint}?provider=${providerParam}&redirect_url=${redirectUrl}`)
+      .pipe(
+        catchError(error => {
+          console.error("Error initiating server auth:", error);
+          this.loading = false;
+          return error;
+        })
+      )
       .subscribe(
         (response: any) => {
-          const authorizationUrl = response?.message?.authorization_url || response?.message?.authorizationUrl || response?.authorization_url || response?.authorizationUrl;
+
+          const authorizationUrl = response?.body?.authorization_url;
+
           if (authorizationUrl) {
             window.location.href = authorizationUrl;
             return;
           }
+
+          console.error("No authorization URL received from server");
           this.loading = false;
-        },
-        () => this.loading = false
-      );
+        });
 
   }
 
